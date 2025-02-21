@@ -246,6 +246,7 @@ if (Test-Path $gimpExecutablePath) {
 } else {
     # Download the installer to the Temp directory
     $gimpInstallerFilePath = "$env:TEMP\gimp_installer.exe"
+    Write-Host "Downloading GIMP..."
     $downloadResult = Invoke-DownloadFileFromAvailableMirrors -mirrorUrls $gimpToolDetails.mirrors -outfile $gimpInstallerFilePath
     if (-not $downloadResult) {
         Write-Host "Failed to download GIMP. Please try again later or install manually."

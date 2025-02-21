@@ -17,3 +17,14 @@
 
 5.运行gradio_demo.py
   python gradio_demo.py
+
+
+# omnitool/omnibox
+1.启动Docker Desktop
+2.运行manage_vm.ps1 create
+  到docker desktop查看容器的启动日志，可能会各种原因导致启动失败，比如内存不足，compose.yml文件调整一下,8G改为6G
+3.运行manage_vm.ps1 start
+4.运行manage_vm.ps1 stop
+5.运行manage_vm.ps1 delete
+
+

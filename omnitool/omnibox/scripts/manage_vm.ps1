@@ -1,4 +1,22 @@
+function Test-VMStorage {
+    $storagePath = "../vm/win11storage"
+    if (-not (Test-Path $storagePath)) {
+        Write-Host "Storage directory not found. Creating..."
+        New-Item -ItemType Directory -Path $storagePath -Force
+    }
+    
+    # 验证权限
+    $acl = Get-Acl $storagePath
+    if (-not ($acl.Access | Where-Object { $_.IdentityReference -match "Users" -and $_.FileSystemRights -match "Modify" })) {
+        Write-Host "Adding required permissions..."
+        $rule = New-Object System.Security.AccessControl.FileSystemAccessRule("Users","Modify","Allow")
+        $acl.SetAccessRule($rule)
+        Set-Acl $storagePath $acl
+    }
+}
+
 function Create-VM {
+    Test-VMStorage
     if (-not (docker images windows-local -q)) {
         Write-Host "Image not found locally. Building..."
         docker build -t windows-local ..

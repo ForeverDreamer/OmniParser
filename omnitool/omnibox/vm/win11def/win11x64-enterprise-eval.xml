@@ -13,22 +13,17 @@
     <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
       <DiskConfiguration>
         <Disk wcm:action="add">
-          <DiskID>0</DiskID>
-          <WillWipeDisk>true</WillWipeDisk>
           <CreatePartitions>
-            <!-- System partition (ESP) -->
             <CreatePartition wcm:action="add">
               <Order>1</Order>
               <Type>EFI</Type>
-              <Size>128</Size>
+              <Size>100</Size>
             </CreatePartition>
-            <!-- Microsoft reserved partition (MSR) -->
             <CreatePartition wcm:action="add">
               <Order>2</Order>
               <Type>MSR</Type>
               <Size>128</Size>
             </CreatePartition>
-            <!-- Windows partition -->
             <CreatePartition wcm:action="add">
               <Order>3</Order>
               <Type>Primary</Type>
@@ -36,19 +31,16 @@
             </CreatePartition>
           </CreatePartitions>
           <ModifyPartitions>
-            <!-- System partition (ESP) -->
             <ModifyPartition wcm:action="add">
               <Order>1</Order>
               <PartitionID>1</PartitionID>
               <Label>System</Label>
               <Format>FAT32</Format>
             </ModifyPartition>
-            <!-- MSR partition does not need to be modified -->
             <ModifyPartition wcm:action="add">
               <Order>2</Order>
               <PartitionID>2</PartitionID>
             </ModifyPartition>
-            <!-- Windows partition -->
             <ModifyPartition wcm:action="add">
               <Order>3</Order>
               <PartitionID>3</PartitionID>

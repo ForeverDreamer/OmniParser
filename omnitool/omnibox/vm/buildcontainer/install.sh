@@ -969,6 +969,20 @@ bootWindows() {
     fi
   fi
 
+  if [[ "${BOOT_MODE,,}" == "windows_secure" ]]; then
+    # 确保UEFI启动文件存在
+    if [ ! -f "$STORAGE/$BOOT_MODE.rom" ]; then
+      error "UEFI boot ROM file not found!"
+      exit 1
+    fi
+    
+    # 验证UEFI变量存储
+    if [ ! -f "$STORAGE/$BOOT_MODE.vars" ]; then
+      warn "UEFI variables file not found, creating new one..."
+      touch "$STORAGE/$BOOT_MODE.vars"
+    fi
+  fi
+
   return 0
 }
 
